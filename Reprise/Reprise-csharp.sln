@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{3A811A2D-7EBE-149C-8728-F146C990F16D}") = "Reprise", "Assembly-CSharp-firstpass-vs.csproj", "{D4170CCB-465D-98AD-6AB2-E30604511DE5}"
+EndProject
+Project("{3A811A2D-7EBE-149C-8728-F146C990F16D}") = "Reprise", "Assembly-CSharp-vs.csproj", "{C5D8751E-AACB-3DE3-A322-BA48056CBCC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4170CCB-465D-98AD-6AB2-E30604511DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4170CCB-465D-98AD-6AB2-E30604511DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4170CCB-465D-98AD-6AB2-E30604511DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4170CCB-465D-98AD-6AB2-E30604511DE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5D8751E-AACB-3DE3-A322-BA48056CBCC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D8751E-AACB-3DE3-A322-BA48056CBCC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D8751E-AACB-3DE3-A322-BA48056CBCC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D8751E-AACB-3DE3-A322-BA48056CBCC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	
+EndGlobal

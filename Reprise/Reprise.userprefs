@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\shapeManager.cs">
+    <Files>
+      <File FileName="Assets\Code\shapeCreature.cs" Line="57" Column="24" />
+      <File FileName="Assets\Code\shapeManager.cs" Line="76" Column="92" />
+      <File FileName="Assets\Code\shapeDropping.cs" Line="26" Column="29" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
