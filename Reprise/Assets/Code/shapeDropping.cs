@@ -16,7 +16,6 @@ public class shapeDropping : MonoBehaviour
     }
 
     public GameObject shapeSpace;
-    public bool ghost;
 	public Vector3 targetPos;
 	public float speed;
 	
@@ -32,7 +31,7 @@ public class shapeDropping : MonoBehaviour
 	// Use this for initialization
 	void Start() 
     {
-		targetPos = this.transform.localPosition;
+		//targetPos = Vector3.zero;
 		this.renderer.material = ghostMaterial;
 	}
 		
@@ -45,11 +44,11 @@ public class shapeDropping : MonoBehaviour
             {
                 historyCounter = 0;
             }
-            targetPos = new Vector3(transform.position.x, history[historyCounter].y, transform.position.z);
+            targetPos.x = transform.position.x - speed;
+			targetPos.y = history[historyCounter].y;;
 			historyCounter++;
         }
-		this.transform.position = Vector3.Lerp(this.transform.position, targetPos, 0.2f);
-		this.transform.rotation = shapeManager.playerShape.transform.rotation;
+		this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, targetPos, 0.2f);
 	}
 	
     public void depthCheck()

@@ -12,12 +12,10 @@ public class shapeCreature : MonoBehaviour
 	public Vector3 targetScale;
 	public float speed = 0.2f;
 	public int[] counts;
-	public GameObject[] prefabs;
 	
 
 	// Use this for initialization
 	void Start() {
-		counts[0] = 0; counts[1] = 0; counts[2] = 0;
 		targetPos = this.transform.localPosition;
 		targetScale = this.transform.localScale;
 	}
@@ -32,7 +30,8 @@ public class shapeCreature : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetKey("up"))
+     	counts[2] = 3;
+		if (Input.GetKey("up"))
         {
             targetPos += new Vector3(0, speed, 0);
         }
@@ -55,16 +54,14 @@ public class shapeCreature : MonoBehaviour
 	
 	public void ScaleUp(float dt) {
 		targetScale = transform.localScale + new Vector3(dt,dt,dt);
-		if (shapeManager.rotationCount % 5 == 0) {
+		if (shapeManager.rotationCount % 1 == 0) {
 			int maxIter = 0;
-			int maxCount = 0;
-			for(var i = 0; i < 2; i++) {
-				if (maxCount < counts[i]) {
-					maxCount = counts[i];
+			for(int i = 0; i < 3; i++) {
+				if (counts[maxIter] <= counts[i]) {
 					maxIter = i;
 				}
 			}
-			GetComponent<MeshFilter>().mesh = prefabs[maxIter].GetComponentInChildren<MeshFilter>().mesh;
+			GetComponent<MeshFilter>().mesh = shapeManager.prefabs[maxIter];
 		}
 	}
 	

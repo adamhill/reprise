@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class shapeManager : MonoBehaviour 
 {
-    public float worldSize = 280;
+    static public float worldSize = 80;
     public float secondsForRotation = 2;
 
     public delegate void shapeCheck();
@@ -15,6 +15,7 @@ public class shapeManager : MonoBehaviour
 
     public GameObject shapeSpace;
     public GameObject shapeMesh;
+    public GameObject collectMesh;
     public GameObject gameCamera;
     public GameObject gameCameraSpace;
 
@@ -25,17 +26,27 @@ public class shapeManager : MonoBehaviour
 
     public static int rotationCount = 0;
 	
-	public static int cameraDistance = 20;
+	public static int cameraDistance = 10;
 	
 	public GameObject dustSphere;
 	public GameObject skySphere;
 	public Texture2D[] skyBackgrounds;
 	public int currentBackground;
 	public float backgroundFade;
+	
+	public Mesh[] prefabPars;
+	static public Mesh[] prefabs;
+	
+	public Mesh[] shapePrefabPars;
+	static public Mesh[] shapePrefabs;
+	
+	
 
 	// Use this for initialization
 	void Awake () 
     {
+		prefabs = prefabPars;
+		shapePrefabs = shapePrefabPars;
         playerSpace = Instantiate(shapeSpace, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
         playerShape = Instantiate(playerMesh) as GameObject;
         
@@ -63,11 +74,14 @@ public class shapeManager : MonoBehaviour
         {
             history.Add(playerShape.transform.localPosition);
         }
+		if (Time.frameCount % 100 == 0) {
+			CreateShape(Vector3.zero, 1);	
+		}
 		if (previousEulerY < gameCameraSpace.transform.eulerAngles.y && history.Count > 0) {
-			playerShape.GetComponent<shapeCreature>().ScaleUp(0.5f);
       		gameCamera.transform.position = new Vector3(0, 0, -worldSize - cameraDistance);
-            CreateShape();
+            CreateGhost();
 			ChangeBackground();
+			playerShape.GetComponent<shapeCreature>().ScaleUp(0.25f);
 		}
 		
 		if (backgroundFade > 0) {
@@ -87,15 +101,16 @@ public class shapeManager : MonoBehaviour
 		currentBackground = (currentBackground + 1) % skyBackgrounds.Length;
 		skyMaterial.SetTexture("_TexMat2", skyBackgrounds[currentBackground]);
 	}
-
-    void CreateShape()
+	
+    void CreateGhost()
     {
         GameObject temp = Instantiate(shapeMesh) as GameObject;
-        temp.transform.localPosition = playerShape.transform.localPosition;
+        temp.GetComponent<shapeDropping>().targetPos = Vector3.zero;
+		Debug.Log(temp.GetComponent<shapeDropping>().targetPos);
         temp.transform.localScale = playerShape.transform.localScale;
         temp.transform.localRotation = playerShape.transform.localRotation;
         
-		temp.GetComponent<MeshFilter>().mesh = playerShape.gameObject.GetComponentInChildren<MeshFilter>().mesh;
+		temp.GetComponent<MeshFilter>().mesh = playerShape.gameObject.GetComponent<MeshFilter>().mesh;
 				
 		temp.transform.parent = gameCameraSpace.transform;
         foreach (Vector2 v in history) 
@@ -113,5 +128,18 @@ public class shapeManager : MonoBehaviour
 
 		shapeUpdate();
         rotationCount++;
+    }
+	
+    void CreateShape(Vector3 pos, int prefab)
+    {
+        GameObject temp = Instantiate(collectMesh) as GameObject;
+        temp.transform.localPosition = pos;
+        temp.transform.localScale = playerShape.transform.localScale;
+        temp.transform.localRotation = playerShape.transform.localRotation;
+
+		temp.GetComponent<MeshFilter>().mesh = shapePrefabs[prefab];
+				
+		temp.transform.parent = gameCameraSpace.transform;
+		
     }
 }
