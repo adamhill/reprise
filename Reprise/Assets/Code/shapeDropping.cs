@@ -18,7 +18,7 @@ public class shapeDropping : MonoBehaviour
     public GameObject shapeSpace;
     public bool ghost;
 	public Vector3 targetPos;
-	public float speed = 0.1f;
+	public float speed;
 	
     //use this to access proper playerHistory list
     public List<Vector2> history = new List<Vector2>();
@@ -26,11 +26,14 @@ public class shapeDropping : MonoBehaviour
     public int historyCounter = 0;
 	
 	public bool firstCollision = false;
+	
+	public Material ghostMaterial;
 
 	// Use this for initialization
 	void Start() 
     {
 		targetPos = this.transform.localPosition;
+		this.renderer.material = ghostMaterial;
 	}
 		
 	// Update is called once per frame
@@ -42,10 +45,11 @@ public class shapeDropping : MonoBehaviour
             {
                 historyCounter = 0;
             }
-            targetPos = new Vector3(this.transform.position.x + speed, history[historyCounter].y, this.transform.position.z);
-            historyCounter++;
+            targetPos = new Vector3(transform.position.x, history[historyCounter].y, transform.position.z);
+			historyCounter++;
         }
-		this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, targetPos, 0.2f);
+		this.transform.position = Vector3.Lerp(this.transform.position, targetPos, 0.2f);
+		this.transform.rotation = shapeManager.playerShape.transform.rotation;
 	}
 	
     public void depthCheck()
