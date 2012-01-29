@@ -25,16 +25,14 @@ public class shapeDropping : MonoBehaviour
     public int historyCounter = 0;
 	
 	public bool firstCollision = false;
+	
+	public Material ghostMaterial;
 
 	// Use this for initialization
 	void Start() 
     {
-<<<<<<< HEAD
 		//targetPos = Vector3.zero;
 		this.renderer.material = ghostMaterial;
-=======
-		targetPos = this.transform.localPosition;
->>>>>>> origin/master
 	}
 		
 	// Update is called once per frame
@@ -46,14 +44,9 @@ public class shapeDropping : MonoBehaviour
             {
                 historyCounter = 0;
             }
-<<<<<<< HEAD
             targetPos.x = transform.position.x - speed;
 			targetPos.y = history[historyCounter].y;;
 			historyCounter++;
-=======
-            targetPos = new Vector3(this.transform.position.x + speed, history[historyCounter].y, this.transform.position.z);
-            historyCounter++;
->>>>>>> origin/master
         }
 		this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, targetPos, 0.2f);
 	}

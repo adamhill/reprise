@@ -78,10 +78,7 @@ public class shapeManager : MonoBehaviour
 			CreateShape(Vector3.zero, 1);	
 		}
 		if (previousEulerY < gameCameraSpace.transform.eulerAngles.y && history.Count > 0) {
-<<<<<<< HEAD
-=======
 			playerShape.GetComponent<shapeCreature>().ScaleUp(5);
->>>>>>> origin/master
       		gameCamera.transform.position = new Vector3(0, 0, -worldSize - cameraDistance);
             CreateGhost();
 			ChangeBackground();

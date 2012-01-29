@@ -11,11 +11,7 @@ public class shapeCreature : MonoBehaviour
     public Vector3 targetPos;
 	public Vector3 targetScale;
 	public float speed = 0.2f;
-<<<<<<< HEAD
 	public int[] counts;
-=======
->>>>>>> origin/master
-	
 
 	// Use this for initialization
 	void Start() {
@@ -57,7 +53,6 @@ public class shapeCreature : MonoBehaviour
 	
 	public void ScaleUp(float dt) {
 		targetScale = transform.localScale + new Vector3(dt,dt,dt);
-<<<<<<< HEAD
 		if (shapeManager.rotationCount % 1 == 0) {
 			int maxIter = 0;
 			for(int i = 0; i < 3; i++) {
@@ -67,8 +62,6 @@ public class shapeCreature : MonoBehaviour
 			}
 			GetComponent<MeshFilter>().mesh = shapeManager.prefabs[maxIter];
 		}
-=======
->>>>>>> origin/master
 	}
 	
 	public void CollideWithCreature(GameObject obj) {
