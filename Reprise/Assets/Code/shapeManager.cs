@@ -64,7 +64,7 @@ public class shapeManager : MonoBehaviour
             history.Add(playerShape.transform.localPosition);
         }
 		if (previousEulerY < gameCameraSpace.transform.eulerAngles.y && history.Count > 0) {
-			playerShape.GetComponent<shapeCreature>().ScaleUp(0.2f);
+			playerShape.GetComponent<shapeCreature>().ScaleUp(5);
       		gameCamera.transform.position = new Vector3(0, 0, -worldSize - cameraDistance);
             CreateShape();
 			ChangeBackground();
@@ -94,6 +94,7 @@ public class shapeManager : MonoBehaviour
         GameObject temp = Instantiate(shapeMesh) as GameObject;
         temp.transform.localPosition = playerShape.transform.localPosition;
         temp.transform.localScale = playerShape.transform.localScale;
+        temp.transform.localRotation = playerShape.transform.localRotation;
         temp.GetComponent<MeshFilter>().mesh = playerShape.GetComponent<MeshFilter>().mesh;
 		temp.transform.parent = objectSpace.transform;
         temp.GetComponent<shapeDropping>().shapeSpace = objectSpace;
