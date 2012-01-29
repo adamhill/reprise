@@ -27,8 +27,11 @@ public class shapeManager : MonoBehaviour
 	
 	public static int cameraDistance = 20;
 	
-	public GameObject skySphere;
 	public GameObject dustSphere;
+	public GameObject skySphere;
+	public Texture2D[] skyBackgrounds;
+	public int currentBackground;
+	public float backgroundFade;
 
 	// Use this for initialization
 	void Awake () 
@@ -63,11 +66,29 @@ public class shapeManager : MonoBehaviour
 		if (previousEulerY < gameCameraSpace.transform.eulerAngles.y && history.Count > 0) {
 			playerShape.GetComponent<shapeCreature>().ScaleUp(0.2f);
       		gameCamera.transform.position = new Vector3(0, 0, -worldSize - cameraDistance);
-            createShape();
+            CreateShape();
+			ChangeBackground();
+		}
+		
+		if (backgroundFade > 0) {
+			Material skyMaterial = skySphere.renderer.material;
+			skyMaterial.SetFloat("_Blend", 1.0f - backgroundFade);
+			backgroundFade -= Time.deltaTime * 0.25f;
+			if (backgroundFade < 0) {
+				skyMaterial.SetFloat("_Blend", 1.0f);
+			}
 		}
 	}
+	
+	void ChangeBackground() {
+		backgroundFade = 1.0f;
+		Material skyMaterial = skySphere.renderer.material;
+		skyMaterial.SetTexture("_TexMat1", skyBackgrounds[currentBackground]);
+		currentBackground = (currentBackground + 1) % skyBackgrounds.Length;
+		skyMaterial.SetTexture("_TexMat2", skyBackgrounds[currentBackground]);
+	}
 
-    void createShape()
+    void CreateShape()
     {
         GameObject objectSpace = Instantiate(shapeSpace, playerSpace.transform.localEulerAngles, Quaternion.identity) as GameObject;
         GameObject temp = Instantiate(shapeMesh) as GameObject;

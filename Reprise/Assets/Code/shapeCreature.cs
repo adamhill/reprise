@@ -10,6 +10,7 @@ public class shapeCreature : MonoBehaviour
 {
     public Vector3 targetPos;
 	public Vector3 targetScale;
+	public float speed = 0.2f;
 	
 
 	// Use this for initialization
@@ -30,19 +31,19 @@ public class shapeCreature : MonoBehaviour
     {
         if (Input.GetKey("up"))
         {
-            targetPos += new Vector3(0, .1f, 0);
+            targetPos += new Vector3(0, speed, 0);
         }
         if (Input.GetKey("down"))
         {
-            targetPos -= new Vector3(0, .1f, 0);
+            targetPos -= new Vector3(0, speed, 0);
         }
         if (Input.GetKey("right"))
         {
-            targetPos += new Vector3(.1f, 0, 0);
+            targetPos += new Vector3(speed, 0, 0);
         }
         if (Input.GetKey("left"))
         {
-            targetPos -= new Vector3(.1f, 0, 0);
+            targetPos -= new Vector3(speed, 0, 0);
         }
 		this.transform.localScale = Vector3.Lerp(transform.localScale, targetScale, 0.02f);
 		this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, targetPos, 0.2f);
