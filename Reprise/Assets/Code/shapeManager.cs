@@ -90,14 +90,15 @@ public class shapeManager : MonoBehaviour
 
     void CreateShape()
     {
-        GameObject objectSpace = Instantiate(shapeSpace, playerSpace.transform.localEulerAngles, Quaternion.identity) as GameObject;
         GameObject temp = Instantiate(shapeMesh) as GameObject;
         temp.transform.localPosition = playerShape.transform.localPosition;
         temp.transform.localScale = playerShape.transform.localScale;
         temp.transform.localRotation = playerShape.transform.localRotation;
-        temp.GetComponent<MeshFilter>().mesh = playerShape.GetComponent<MeshFilter>().mesh;
-		temp.transform.parent = objectSpace.transform;
-        temp.GetComponent<shapeDropping>().shapeSpace = objectSpace;
+        
+		temp.GetComponent<MeshFilter>().mesh = playerShape.gameObject.GetComponentInChildren<MeshFilter>().mesh;
+				
+		temp.transform.parent = gameCameraSpace.transform;
+        temp.GetComponent<shapeDropping>().shapeSpace = playerSpace;
         foreach (Vector2 v in history) 
             temp.GetComponent<shapeDropping>().history.Add(v);
  

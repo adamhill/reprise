@@ -17,11 +17,8 @@ public class shapeDropping : MonoBehaviour
 
     public GameObject shapeSpace;
     public bool ghost;
-    public int age;
-    public Color color;
-    public Shapes currentShape;
-    public Shapes nextShape;
 	public Vector3 targetPos;
+	public float speed = 0.1f;
 	
     //use this to access proper playerHistory list
     public List<Vector2> history = new List<Vector2>();
@@ -45,7 +42,7 @@ public class shapeDropping : MonoBehaviour
             {
                 historyCounter = 0;
             }
-            targetPos = new Vector3(history[historyCounter].x, history[historyCounter].y, this.transform.position.z);
+            targetPos = new Vector3(this.transform.position.x + speed, history[historyCounter].y, this.transform.position.z);
             historyCounter++;
         }
 		this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, targetPos, 0.2f);
